@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:todo_iug/views/screens/all_tasks_screen.dart';
 import 'package:todo_iug/views/screens/complete_tasks.dart';
@@ -12,24 +14,21 @@ class _MainTasksScreenState extends State<MainTasksScreen> {
   PageController pageController = PageController();
 
   int pageIndex = 0;
- refreshPage(){
-  setState(() {});
-}
+  updateScreen() {
+    log('set state from main screen has been excuted');
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return 
-    Scaffold(
+    return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
           currentIndex: pageIndex,
           onTap: (v) {
             pageIndex = v;
             pageController.jumpToPage(v);
-            setState(() {
-              
-            });
-            
+            setState(() {});
           },
           items: const [
             BottomNavigationBarItem(icon: Icon(Icons.list), label: "All Tasks"),
@@ -38,16 +37,24 @@ class _MainTasksScreenState extends State<MainTasksScreen> {
             BottomNavigationBarItem(
                 icon: Icon(Icons.cancel), label: "InComplete Tasks"),
           ]),
-      appBar: AppBar(title: Text("Todo App")),
+      appBar: AppBar(
+        title: Text("Todo App"),
+        actions: [
+          ElevatedButton(
+              onPressed: () {
+                updateScreen();
+              },
+              child: Text("Test SetState"))
+        ],
+      ),
       body: PageView(
         controller: pageController,
         children: [
-          AllTasksScreen(refreshPage),
-          CompleteTasksScreen(refreshPage),
-          InCompleteTasksScreen(refreshPage)
+          AllTasksScreen(updateScreen),
+          CompleteTasksScreen(updateScreen),
+          InCompleteTasksScreen(updateScreen)
         ],
       ),
     );
-  
   }
 }

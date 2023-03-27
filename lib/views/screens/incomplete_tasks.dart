@@ -3,7 +3,7 @@ import 'package:todo_iug/data/data_source.dart';
 import 'package:todo_iug/views/widgets/task_widget.dart';
 
 class InCompleteTasksScreen extends StatelessWidget {
-    Function function;
+  Function function;
   InCompleteTasksScreen(this.function);
   @override
   Widget build(BuildContext context) {
